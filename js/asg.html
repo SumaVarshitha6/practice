@@ -1,0 +1,121 @@
+<html>
+    <head>
+        <style>
+            body{
+                background-color: rgba(70, 111, 117, 0.847);
+            }
+            img{
+                width:100px;
+                height:50px;
+                border:2px solid black;
+                display:block;
+                margin:20px;
+                
+            }
+            li{
+                list-style-type: none;
+                margin :30px 100px;
+            }
+        </style>
+        <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <div id="ss"></div>
+        <ul id="u">
+        </ul>
+        <script>
+            var sv=document.getElementById("ss")
+            var rs = $.get("https://restcountries.com/v3.1/all",function(res){
+                ch(res);
+               gen(res);
+              
+            })
+
+            function ch(ar){
+                    var as1=document.createElement("input");
+                     as1.value="Asia";
+                     var s=document.createElement("P")
+                     s.innerHTML="asia";
+                    as1.type="checkbox";
+                    var as2=document.createElement("input");
+                    as2.value="Africe";
+                    as2.type="checkbox";
+                    var t=document.createElement("P")
+                     t.innerHTML="Africa";
+                    var as3=document.createElement("input");
+                    as3.value="Europe";as3.type="checkbox";
+                    var u=document.createElement("P")
+                     u.innerHTML="Europe";
+                    var as4=document.createElement("input");
+                    as4.value="North America";as4.type="checkbox";
+                    var u=document.createElement("P")
+                     u.innerHTML="North America";
+                    var as5=document.createElement("input");
+                    as5.value="Oceania";as5.type="checkbox";
+                    var v=document.createElement("P")
+                     v.innerHTML="Oceania";
+                    var as6=document.createElement("input");
+                    as6.value="South America";as6.type="checkbox";
+                    var w=document.createElement("P")
+                     w.innerHTML="South America";
+                    var as7=document.createElement("input");
+                    as7.value="Antarctica";as7.type="checkbox";
+                    var x=document.createElement("P")
+                     x.innerHTML="Antarctica";
+                    var as8=document.createElement("input");
+                    as8.value="South America";as8.type="checkbox";
+                    var y=document.createElement("P")
+                     y.innerHTML="South America";
+
+                    sv.appendChild(as1);
+                    sv.appendChild(s);
+                    sv.appendChild(as2);
+                    sv.appendChild(t);
+                    sv.appendChild(as3);
+                    sv.appendChild(s);
+                    sv.appendChild(as4);
+                    sv.appendChild(s);
+                    sv.appendChild(as5);
+                    sv.appendChild(s);
+                    sv.appendChild(as6);
+                    sv.appendChild(s);
+                    sv.appendChild(as7);
+                    sv.appendChild(s);
+                    sv.appendChild(as8);
+                    sv.appendChild(s);
+                    chck(ar);
+                     
+                    }
+
+                
+                    function chck(){       
+                var fs = s.filter(function(h){                   
+                        return(h.continents==="e.target.value")
+                    });   
+                    console.log(fs);
+                    document.getElementById("u").innerHTML="";
+                    gen(fs);
+
+                }
+
+            function gen(ar){
+                document.getElementById("u").innerHTML="";
+                ar.forEach(function(ob){ 
+                    // console.dir(ob.continents);
+                 var li1=document.createElement("li");
+                 li1.innerHTML=ob.name.common ;
+                document.getElementById("u").appendChild(li1);
+                 var li2=document.createElement("li")
+                 li2.innerHTML=ob.continents;
+                 var img=document.createElement("img");
+                 img.src=ob.flags.png;
+                 li1.appendChild(img);
+                 document.getElementById("u").appendChild(li2);
+               document.getElementById("u").appendChild(li1);
+               
+                
+               })
+            }
+        </script>
+    </body>
+</html>
