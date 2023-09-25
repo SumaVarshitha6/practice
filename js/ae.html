@@ -1,0 +1,122 @@
+<html>
+  <head>
+    <style>
+      body {
+        background-color: rgb(225, 250, 242);
+      }
+      img {
+        width: 40px;
+        height: 40px;
+        border: 2px solid rgba(57, 58, 60, 0.429);
+        margin: 20px;
+      }
+      ul {
+        width: 50%;
+        height: 200px;
+        border: 2px double rgb(228, 25, 25);
+        background-color: rgb(247, 245, 216);
+        box-sizing: border-box;
+      }
+      button {
+        color: black;
+        background-color: orange;
+      }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  </head>
+  <body>
+    <button onclick="prd()">Add Product</button>
+    <button onclick="sortAsc()">1-5</button>
+    <button onclick="sortdsc()">5-1</button>
+    <div id="d1"></div>
+    <script>
+      var obj = [];
+      var y = document.getElementById("d1");
+      /* axios
+        .get("https://fakestoreapi.com/products")
+        .then(function (res) {
+          obj = res.data;
+        })
+        .catch(function (err) {}); */
+
+      function sortAsc() {
+        y.innerHTML = "";
+        axios
+          .get("https://fakestoreapi.com/products")
+          .then(function (res) {
+            obj = res.data;
+            console.log(data);
+          })
+          .catch(function (err) {});
+
+        obj.sort(function (a, b) {
+          var f1 = a.rating.rate;
+          var f2 = b.rating.rate;
+          if (f1 < f2) {
+            return -1;
+          }
+          if (f1 > f2) {
+            return 1;
+          }
+          return 0;
+        });
+        dv(obj);
+        console.log(obj);
+      }
+
+      function sortdsc() {
+        y.innerHTML = "";
+        axios
+          .get("https://fakestoreapi.com/products")
+          .then(function (res) {
+            obj = res.data;
+          })
+          .catch(function (err) {});
+
+        obj.sort(function (a, b) {
+          var f1 = a.rating.rate;
+          var f2 = b.rating.rate;
+          if (f1 < f2) {
+            return 1;
+          }
+          if (f1 > f2) {
+            return -1;
+          }
+          return 0;
+        });
+        dv(obj);
+      }
+      function prd(ar) {
+        axios
+          .get("https://fakestoreapi.com/products")
+          .then(function (res) {
+            obj = res.data;
+            dv(obj);
+          })
+          .catch(function (err) {});
+      }
+      function dv(ar) {
+        y.innerHTML = "";
+        ar.forEach(function (r) {
+          var x = document.createElement("ul");
+          x.style = "list-style-type:none";
+          var li0 = document.createElement("li");
+          var img = document.createElement("img");
+          img.src = r.image;
+          li0.appendChild(img);
+          var li1 = document.createElement("li");
+          li1.innerHTML = "ID : " + r.id;
+          var li2 = document.createElement("li");
+          li2.innerHTML = "TITLE : " + r.title;
+          var li3 = document.createElement("li");
+          li3.innerHTML = "RATING : " + r.rating.rate;
+          x.appendChild(li0);
+          x.appendChild(li1);
+          x.appendChild(li2);
+          x.appendChild(li3);
+          y.appendChild(x);
+        });
+      }
+    </script>
+  </body>
+</html>

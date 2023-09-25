@@ -1,0 +1,123 @@
+<html>
+    <head>
+        <style>
+            body{
+                background-color:rgb(225, 250, 242) ;
+            }
+            img{
+                width:100px;
+                height:100px;
+                border:2px solid rgba(57, 58, 60, 0.429);
+                margin:20px;
+            }
+        </style>
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    </head>
+    <body>
+        <button onclick="sortAsc()" id="as">A-Z</button>
+        <button onclick="sortdsc()" id="ds">Z-A</button>
+        <label>SEARCHING :</label>
+        <input type="text" id="t5" name="search" onkeyup="srch()"><br><br>
+        <table border="1px">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>TITLE</th>
+                    <th>LOGO</th>
+                    <th>CATEGORY</th>
+                    <th>PRICE</th>
+                    <th>RATING</th>
+                </tr>
+            </thead>
+            <tbody id="d1">
+
+            </tbody>
+        </table>
+        <script>
+            var x= document.getElementById('d1');
+            var src=document.getElementById('t5');
+
+            var s=[];
+            axios.get("https://fakestoreapi.com/products").then(function(res){  
+                
+                createtable(res.data)
+                s=res.data;
+                
+            }).catch(function(err){
+           
+            })
+
+            function srch(){       
+                var fs = s.filter(function(h){                   
+                        return(h.title.toLowerCase().startsWith(src.value.toLowerCase()))
+                    });   
+                    console.log(fs);
+                    x.innerHTML="";
+                    createtable(fs);
+
+                }
+
+            function sortAsc() {
+            x.innerHTML="";
+            s.sort(function (a, b) {
+          var f1 = a.title.toLowerCase();
+          var f2 = b.title.toLowerCase();
+          if (f1 < f2) {
+            return -1;
+          }
+          if (f1 > f2) {
+            return 1;
+          }
+          return 0;
+        });
+        createtable(s);
+      }
+        function sortdsc() {
+        x.innerHTML="";
+        s.sort(function (a, b) {
+          var f1 = a.title.toLowerCase();
+          var f2 = b.title.toLowerCase();
+          if (f1 < f2) {
+            return 1;
+          }
+          if (f1 > f2) {
+            return -1;
+          }
+          return 0;
+        });
+        createtable(s);
+      }
+
+            function createtable(arr){
+                    arr.forEach(function (r) {
+                        var trow=document.createElement('tr');
+                        var li0=document.createElement('td');
+                        li0.innerHTML=r.id;
+                        var li1=document.createElement('td');
+                        li1.innerHTML=r.title;
+                        var li2=document.createElement('td');
+                        var img=document.createElement('img')
+                        img.src=r.image;
+                        li2.appendChild(img);
+                        var li3=document.createElement('td');
+                        li3.innerHTML=r.category;
+                        var li4=document.createElement('td');
+                        li4.innerHTML=r.price;
+                        var li5=document.createElement('td');
+                        li5.innerHTML=r.rating.rate;
+                        trow.appendChild(li0);
+                        trow.appendChild(li1);
+                        trow.appendChild(li2);
+                        trow.appendChild(li3);
+                        trow.appendChild(li4);
+                        trow.appendChild(li5);
+                        x.appendChild(trow);
+
+                    });
+                }
+
+            
+        </script>
+    </body>
+</html>
+

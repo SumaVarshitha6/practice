@@ -1,0 +1,139 @@
+<html>
+    <head>
+        <style>
+            body{
+              background-color:rgb(225, 250, 242) ;
+            }
+            h1{
+              text-align: center;
+            }
+            form{
+              text-align: center;
+            }
+            #d1{
+              margin:10px 450px;
+              text-align: start;  
+            }
+            img{
+                width: 40px;
+                height:40px;
+                border:2px solid rgba(57, 58, 60, 0.429);
+                margin:20px;
+            }
+            ul{
+                border:2px double rgb(228, 25, 25);
+                background-color: rgb(247, 245, 216);
+                box-sizing: border-box;
+            }
+            button{
+                color:black;
+                background-color:orange;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Add Contacts Card</h1>
+        <form onsubmit="event.preventDefault()" name="userform">
+            <label>Name :</label>
+            <input type="text" id="l1" name="name"><br><br>
+            <label>Number :</label>
+            <input type="number" id="l2" name="no"><br><br>
+            <label>Email :</label>
+            <input type="email" id="l3" name="email"><br><br>
+            <label>Enter image URL :</label>
+            <input type="url" id="l4" name="img"><br><br>
+            <button onclick="ad()" >Add Contact</button>
+            <button onclick="sortAsc()" type="submit">1-5</button>
+            <button onclick="sortdsc()" type="submit">5-1</button>
+            <input type="text" id="l5" onkeyup="srch()" type="submit">
+            <div id="d1"></div>
+        </form>
+        <script>
+          var src=document.getElementById("l5");
+            var y=document.getElementById('d1');
+            var uf=document.userform;
+            var con=[];
+            function ad(){
+                var obj={
+                    name:"",
+                    number:"",
+                    email:"",
+                    url:"",
+                };
+                obj.name=uf.name.value;
+                obj.number=uf.no.value;
+                obj.email=uf.email.value;
+                obj.url=uf.img.value;
+                con.push(obj);
+                dv(con);
+            }
+
+            function sortAsc() {
+            y.innerHTML="";
+            con.sort(function (a, b) {
+          var f1 = a.name;
+          var f2 = b.name;
+          if (f1 < f2) {
+            return -1;
+          }
+          if (f1 > f2) {
+            return 1;
+          }
+          return 0;
+        });
+        dv(con); 
+      }
+        function sortdsc() {
+        y.innerHTML="";
+        con.sort(function (a, b) {
+          var f1 = a.name;
+          var f2 = b.name;
+          if (f1 < f2) {
+            return 1;
+          }
+          if (f1 > f2) {
+            return -1;
+          }
+          return 0;
+        });
+        dv(con);
+      }
+
+      function srch(){       
+                var fs = con.filter(function(h){                   
+                        return (h.name.toLowerCase().startsWith(src.value.toLowerCase()))
+                    });   
+                    y.innerHTML="";
+                    dv(fs);
+                    console.log(fs);
+                }
+      
+            console.log(con);
+            function dv(ar){
+              y.innerHTML="";
+             
+            ar.forEach(function(r){ 
+                var x=document.createElement('ul')
+                x.innerHTML="";
+                x.style="list-style-type:none"
+               var li0=document.createElement('li');
+                var imgs=document.createElement('img')
+                imgs.src=r.url;
+                li0.appendChild(imgs);
+                var li1= document.createElement('li');
+                li1.innerHTML="NAME: "+r.name
+                var li2= document.createElement('li');
+                li2.innerHTML="NUMBER : "+r.number
+                var li3= document.createElement('li');
+                li3.innerHTML="EMAIL : "+r.email
+                x.appendChild(li0)
+                x.appendChild(li1)
+                x.appendChild(li2)
+                x.appendChild(li3)
+                y.appendChild(x)
+                
+            });      
+            }
+        </script>
+    </body>
+</html>
