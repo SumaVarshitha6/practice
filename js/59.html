@@ -1,0 +1,28 @@
+//Print all unique elements in the array.
+
+<script>
+    // Original array
+let ar = [1, 2, 3, 4, 1, 6, 5, 6, 4];
+
+// Array to store unique elements
+let unique = [];
+
+// Loop through the original array
+for (let i = 0; i < ar.length; i++) {
+  // Check if the element exists in the unique array
+  if (unique.indexOf(ar[i]) === -1) {
+    // If it does not exist, add it to the unique array
+    unique.push(ar[i]);
+  }
+}
+
+// Loop through the unique array and print its elements
+for (let i = 0; i < unique.length; i++) {
+  console.log(unique[i]);
+}
+
+// Output: 1 2 3 4 5 6
+</script>
+
+
+

@@ -1,0 +1,18 @@
+//Delete Element From Array At Desired Or Specific Position
+
+<script>
+    var ar=['E','D','U','P','O','L','Y'];
+     //var x=ar.splice(2,1);
+
+     //console.log(ar)
+     var arnew=[];
+     var del=ar[2]
+     
+     for(i=0;i<ar.length;i++){
+        if(ar[i]!==del){
+            arnew.push(ar[i]);
+        }
+     }
+     ar = arnew;
+     console.log(ar)
+</script>
