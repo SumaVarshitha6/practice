@@ -1,0 +1,107 @@
+<html>
+    <head>
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        <style>
+            body{
+                background-color: rgb(189, 251, 244);
+            }
+           button{
+            color:aqua;
+            border: 1px dotted rgb(2, 44, 44);
+            background-color: rgb(5, 95, 101);
+            margin:15px 25px;
+            box-shadow: 3px 3px 3px rgb(12, 70, 79);
+            padding:4px;
+            }  
+            #page{
+                display:flex;
+            }
+            #products{
+                  display:flex;  
+                  flex-wrap: wrap;
+                  width:70%;   
+            }
+            #products ul{
+                width:22%;
+                text-align: center; 
+                color:rgb(12, 70, 79);
+                background-color: aqua;
+                list-style: none;
+                flex-wrap: wrap;
+                border:1px dashed rgb(2, 44, 44);
+                padding:10px;
+                margin:20px;
+                box-shadow: 5px 5px 5px 5px rgb(12, 70, 79);
+            }
+            #cart{
+                display:block;
+                flex-wrap: wrap;
+                width:30%;
+                height:fit-content;
+                background-color:aqua;
+                padding: 35px 100px;
+            }
+            #tp{
+                display:block;
+                padding-left: 200px;
+            }
+            img {
+                width: 60px;
+                height: 60px;
+                border: 2px solid rgba(57, 58, 60, 0.429);
+                margin: 20px;
+            }
+
+        </style>
+    </head>
+    <body>
+        <div id="page">
+            <div id="products"></div>   
+            <div id="cart">
+                <div id="cart-items"></div> 
+                <span id="tp">Total Price :
+                    <span id="tpv"></span>
+                </span>
+        </div>         
+        </div>   
+        <script>
+            var obj;
+             var y = document.getElementById("products");
+            prd(obj);
+        function prd(ar) {
+            axios
+            .get("https://fakestoreapi.com/products")
+            .then(function (res) {
+                obj = res.data;
+                dv(obj);
+            })
+            .catch(function (err) {});
+        }
+
+        function dv(ar) {
+                y.innerHTML = "";
+                ar.forEach(function (r,i) {
+                var x = document.createElement("ul");
+                x.style = "list-style-type:none";
+                var li0 = document.createElement("li");
+                var img = document.createElement("img");
+                img.src = r.image;
+                li0.appendChild(img);
+                var li2 = document.createElement("li");
+                li2.innerHTML = "TITLE : " + r.title;
+                var li3 = document.createElement("li");
+                li3.innerHTML = "RATING : " + r.rating.rate;
+                var li1 = document.createElement("li");
+                li1.innerHTML = "PRICE : " +parseInt(r.price);
+                var li4 = document.createElement("li");
+                x.appendChild(li0);
+                x.appendChild(li2);
+                x.appendChild(li3);
+                x.appendChild(li1);
+                x.appendChild(li4);
+                y.appendChild(x);
+                });
+             }
+        </script>
+    </body>
+    </html>

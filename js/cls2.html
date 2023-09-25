@@ -1,0 +1,112 @@
+<html>
+    <head>
+        <style>
+            body{
+                background-color: rgb(189, 251, 244);
+            }
+           #as,#ds,button{
+            color:aqua;
+            border: 1px dotted rgb(2, 44, 44);
+            background-color: rgb(5, 95, 101);
+            margin:15px 25px;
+            box-shadow: 3px 3px 3px rgb(12, 70, 79);
+            padding:4px;
+            }
+            #d{
+                display:block;
+            }
+            ul{
+                text-align: center;
+                color:rgb(12, 70, 79);
+                background-color: aqua;
+                list-style: none;
+                display:inline-block;
+                border:1px dashed rgb(2, 44, 44);
+                padding:10px;
+                margin:20px;
+                box-shadow: 5px 5px 5px 5px rgb(12, 70, 79);
+             }
+        </style>
+    </head>
+    <body>
+         <button onclick="sortAsc()" id="as">A-Z</button>
+         <button onclick="sortdsc()" id="ds">Z-A</button>
+        <div id="d"></div>
+        <script>
+            var t=document.getElementById('d')
+            var aobj=[
+            {
+                "model" :"ux007",
+                "category": "Household Batteries",
+                "manufacturer": "Duracell",				
+            },
+            {
+               "model" :"xyz",
+               "category": "Recording Equipment",
+               "manufacturer": "Hal Leonard",				
+            },
+            {
+               "model":"abc",
+               "category": "Household Batteries",
+               "manufacturer": "Duracell",				
+            }];
+            card(aobj);
+
+            function sortAsc() {
+            t.innerHTML="";
+                aobj.sort(function (a, b) {
+                    var y = 10;
+                var f1 = a.model;
+                var f2 = b.model;
+                if (f1 < f2) {
+                    return -1;
+                }
+                if (f1 > f2) {
+                    return 1;
+                }
+                return 0;
+                });
+                card(aobj); 
+            }
+            function sortdsc() {
+            t.innerHTML="";
+                aobj.sort(function (a, b) {
+                var f1 = a.model;
+                var f2 = b.model;
+                if (f1 < f2) {
+                    return 1;
+                }
+                if (f1 > f2) {
+                    return -1;
+                }
+                return 0;
+                });
+                card(aobj);
+            }
+            function card(arr){
+                arr.forEach(function(a,i){
+                var u=document.createElement('ul');
+                var li0=document.createElement('li');
+                li0.innerHTML="Model :"+a.model;
+                var li1=document.createElement('li');
+                li1.innerHTML="Category :"+a.category;
+                var li2=document.createElement('li');
+                li2.innerHTML="Manufacturer :"+a.manufacturer;
+                var li3=document.createElement('button');
+                li3.style.borderRadius = "5px";
+                li3.innerHTML="Details";
+                li3.onclick=function(){
+                    console.log("object :",a);
+                    console.log("model :"+a.model);
+                    console.log("index :"+i);
+                }
+                u.appendChild(li0);
+                u.appendChild(li1);
+                u.appendChild(li2);
+                u.appendChild(li3);
+                t.appendChild(u);
+            });
+            }  
+        </script>
+    </body>
+</html>

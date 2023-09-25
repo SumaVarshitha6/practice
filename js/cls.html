@@ -1,0 +1,71 @@
+<html>
+    <head>
+        <style>
+             #d{
+                border:1px solid blue;
+                padding:10px;
+                margin:20px;
+             }
+            #d1{
+                border:1px solid blue;
+                padding:10px;
+                margin:20px;
+            }
+            #d2{
+                border:1px solid blue;
+                padding:10px;
+                margin:20px;
+            }
+            button{
+                color: aqua;
+                background-color: black;
+                margin:10px;
+                box-shadow: 2px 1px 3px 2px rgb(196, 189, 189);
+            }
+        </style>
+    </head>
+    <body>
+        <div id="d"></div>
+        <div id="d1"></div>
+        <div id="d2"></div>
+       
+        <script>
+             var ar=[6,7,"suma"];
+            for(var i=0;i<=ar.length-1;i++){
+                var btn=document.createElement('button');
+                btn.innerHTML=ar[i];
+                // btn.id=s;
+                btn.onclick=function(){
+                    alert(ar[i]);
+                    alert(i);
+                }
+                document.getElementById('d').appendChild(btn);
+            }
+
+            var ar=[6,7,"suma"];
+            for(let i=0;i<=ar.length-1;i++){
+                var btn=document.createElement('button');
+                btn.innerHTML=ar[i];
+                btn.onclick=function(){
+                    alert(ar[i]);
+                    alert(i);
+                }
+                document.getElementById('d1').appendChild(btn);
+            }
+
+            var arr=[6,46,"varshi"];
+            arr.forEach(function(a,i){
+                var btn=document.createElement('button');
+                btn.innerHTML=a;
+                btn.onclick=function(){
+                    alert(a);
+                    alert(i);
+                }
+                document.getElementById('d2').appendChild(btn);
+
+                
+
+            });
+        </script>
+    </body>
+</html>

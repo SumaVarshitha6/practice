@@ -1,0 +1,48 @@
+<html>
+  <head>
+    <style>
+      ul {
+        margin: 20px 500px;
+        border: 2px dotted black;
+        height: 150px;
+        width: 200px;
+        background-color: rgb(52, 52, 115);
+        box-shadow: 10px 10px grey;
+      }
+      li {
+        color: rgb(181, 181, 239);
+        padding: 13px 5px;
+      }
+      button {
+        margin-left: 20px;
+        color: rgb(52, 52, 115);
+        background-color: rgb(181, 181, 239);
+      }
+    </style>
+  </head>
+  <body>
+    <ul id="u"></ul>
+    <script>      
+      var arr = ["apple", "mango", "orange"];
+      var x = document.getElementById("u");
+      abc(arr);
+      function abc(ar) {
+        x.innerHTML = "";
+        ar.forEach(function (a, i) {
+          var li = document.createElement("li");
+          li.innerHTML = a;
+          var btn = document.createElement("button");
+          btn.innerHTML = "delete";
+          btn.onclick = function(){
+            ar.splice(i, 1);
+            abc(ar);
+          }
+          li.appendChild(btn);
+          x.appendChild(li);
+        });
+    }
+       
+     
+    </script>
+  </body>
+</html>
